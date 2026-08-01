@@ -1,6 +1,5 @@
 import { ProductType } from "@/types/productType";
 import { api } from "./utils/api";
-import Image from "next/image";
 import ProducsCard from "./components/main-page-components/ProducsCard";
 import Banner from "./components/main-page-components/Banner";
 

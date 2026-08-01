@@ -5,4 +5,11 @@ export type ProductType = {
   price: number;
   stock: number;
   image_url: string;
+  rating_bar: RatingBarType[];
+};
+
+export type RatingBarType = {
+  star: number;
+  count: number;
+  pct: number;
 };

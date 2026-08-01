@@ -4,6 +4,7 @@ import { useState } from "react";
 import Gallery from "./components/Gallery";
 import Comments from "./components/Comments";
 import Stars from "./components/Stars";
+import RatingBar from "./components/RatingBar";
 
 const product = {
   id: 1,
@@ -21,11 +22,12 @@ const product = {
     "/images/dumbbell-3.jpg",
     "/images/dumbbell-4.jpg",
   ],
-  specs: [
-    { label: "وزن", value: "۲۰ کیلوگرم" },
-    { label: "جنس", value: "فولاد آلیاژی" },
-    { label: "پوشش", value: "رابر ضد لغزش" },
-    { label: "گارانتی", value: "۲ سال" },
+  ratingBars: [
+    { star: 5, count: 23, pct: 60 },
+    { star: 4, count: 9, pct: 25 },
+    { star: 3, count: 4, pct: 10 },
+    { star: 2, count: 2, pct: 5 },
+    { star: 1, count: 0, pct: 0 },
   ],
 };
 
@@ -61,17 +63,6 @@ const reviews = [
     color: "amber",
   },
 ];
-
-const ratingBars = [
-  { star: 5, count: 23, pct: 60 },
-  { star: 4, count: 9, pct: 25 },
-  { star: 3, count: 4, pct: 10 },
-  { star: 2, count: 2, pct: 5 },
-  { star: 1, count: 0, pct: 0 },
-];
-
-
-
 
 export default function Page() {
   const [qty, setQty] = useState(1);
@@ -131,14 +122,7 @@ export default function Page() {
 
           {/* specs */}
           <div className="grid grid-cols-2 gap-2">
-            {product.specs.map((s) => (
-              <div key={s.label} className="bg-zinc-50 rounded-lg px-3 py-2.5">
-                <div className="text-xs text-zinc-400 mb-1">{s.label}</div>
-                <div className="text-sm font-medium text-zinc-800">
-                  {s.value}
-                </div>
-              </div>
-            ))}
+
           </div>
 
           <hr className="border-zinc-200" />
@@ -249,20 +233,8 @@ export default function Page() {
             </div>
           </div>
           <div className="flex-1 flex flex-col gap-1.5">
-            {ratingBars.map((b) => (
-              <div
-                key={b.star}
-                className="flex items-center gap-2 text-xs text-zinc-500"
-              >
-                <span className="w-3">{b.star}</span>
-                <div className="flex-1 h-1.5 bg-zinc-200 rounded-full overflow-hidden">
-                  <div
-                    className="h-full bg-amber-400 rounded-full"
-                    style={{ width: `${b.pct}%` }}
-                  />
-                </div>
-                <span className="w-4 text-left">{b.count}</span>
-              </div>
+            {product.ratingBars.map((b) => (
+              <RatingBar rate={b} />
             ))}
           </div>
         </div>

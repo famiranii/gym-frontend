@@ -2,7 +2,7 @@ const baseUrl = process.env.NEXT_PUBLIC_API_URL;
 
 const getToken = () => {
   if (typeof window === "undefined") return null;
-  return localStorage.getItem("token");
+  return localStorage.getItem("fff");
 };
 
 async function request<T>(
@@ -23,8 +23,9 @@ async function request<T>(
   });
 
   if (!res.ok) {
-    const error = await res.json().catch(() => ({}));
-    // throw new Error(error.message || "Request failed");
+    const error = await res.text();
+    console.error("Server error:", error);
+    throw new Error(error);
   }
 
   return res.json();

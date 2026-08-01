@@ -9,3 +9,11 @@ export const signupSchema = z.object({
   email: z.string().email("لطفا ایمیل معتبر وارد کنید"),
   password: z.string().min(6, "رمز باید بیشتر از 6 حرف باشد"),
 });
+
+export const addProductSchema = z.object({
+  name: z.string().min(6, "نام محصول را به درستی وارد کنید"),
+  description: z.string().min(25, "توضیحات را کامل کنید"),
+  price: z.number().min(1, "قیمت محصول را وارد کنید"),
+  stock: z.number().min(0, "مقدار باید صفر یا بیشتر باشد"),
+  image: z.instanceof(File, { message: "تصویر محصول را انتخاب کنید" }),
+});

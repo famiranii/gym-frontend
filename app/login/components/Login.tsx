@@ -25,7 +25,7 @@ export default function Login({
   });
 
   const onSubmit = async (data: FormData) => {
-    const res = await api.post("register" , data)
+    const res = await api.post("login" , data)
     console.log(res)
   };
 

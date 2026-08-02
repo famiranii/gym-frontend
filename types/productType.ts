@@ -5,7 +5,8 @@ export type ProductType = {
   price: number;
   stock: number;
   image_url: string;
-  rating_bar: RatingBarType[];
+  rating_bars: RatingBarType[];
+  images: string[];
 };
 
 export type RatingBarType = {

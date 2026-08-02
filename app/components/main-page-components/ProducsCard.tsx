@@ -9,7 +9,7 @@ export default function ProducsCard({ product }: { product: ProductType }) {
       className="bg-white rounded-3xl overflow-hidden shadow-sm hover:shadow-xl transition"
     >
       <img
-        src={`http://localhost:9000${product.image_url}`}
+        src={process.env.NEXT_PUBLIC_API_URL + product.image_url}
         alt={product.name}
         className="w-full aspect-square object-cover"
       />

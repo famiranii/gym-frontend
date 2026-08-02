@@ -2,14 +2,20 @@
 
 import { useState } from "react";
 
-export default function Gallery({ images }: { images: string[] }) {
+export default function Gallery({
+  images,
+  image_url,
+}: {
+  images: string[];
+  image_url: string;
+}) {
   const [activeImg, setActiveImg] = useState(0);
-
+  const allImages = [image_url, ...images.filter((img) => img !== image_url)];
   return (
     <div className="flex flex-col gap-3">
       <div className="aspect-square rounded-2xl border border-zinc-200 bg-zinc-50 flex items-center justify-center overflow-hidden">
         <img
-          src={images[activeImg]}
+          src={process.env.NEXT_PUBLIC_API_URL + images[activeImg]}
           alt={"product image"}
           className="w-full h-full object-cover"
           onError={(e) => {
@@ -30,27 +36,21 @@ export default function Gallery({ images }: { images: string[] }) {
         </svg>
       </div>
       <div className="grid grid-cols-4 gap-2">
-        {images.map((_, i) => (
+        {allImages.map((img, i) => (
           <button
             key={i}
             onClick={() => setActiveImg(i)}
-            className={`aspect-square rounded-xl border bg-zinc-50 flex items-center justify-center transition-all ${
+            className={`aspect-square rounded-xl border bg-zinc-50 flex items-center justify-center transition-all overflow-hidden ${
               activeImg === i
                 ? "border-blue-500 border-2"
                 : "border-zinc-200 hover:border-zinc-400"
             }`}
           >
-            <svg
-              className="w-7 h-7 text-zinc-300"
-              viewBox="0 0 40 40"
-              fill="currentColor"
-            >
-              <rect x="4" y="17" width="8" height="6" rx="2" />
-              <rect x="12" y="14" width="4" height="12" rx="1" />
-              <rect x="16" y="18" width="8" height="4" rx="1" />
-              <rect x="24" y="14" width="4" height="12" rx="1" />
-              <rect x="28" y="17" width="8" height="6" rx="2" />
-            </svg>
+            <img
+              src={process.env.NEXT_PUBLIC_API_URL + img}
+              alt={`product ${i + 1}`}
+              className="w-full h-full object-cover"
+            />
           </button>
         ))}
       </div>

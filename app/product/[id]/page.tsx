@@ -46,7 +46,11 @@ export default async function PostPage({
 }) {
   const { id } = await params;
   const product: ProductType = await api.get("products/" + id);
-  console.log(product);
+  const distribution = product.distribution?.map((d) => ({
+    stars: d.stars,
+    count: d.count,
+    pct: product.rating_count > 0 ? (d.count / product.rating_count) * 100 : 0,
+  }));
   return (
     <div className="max-w-5xl mx-auto px-4 py-8" dir="rtl">
       {/* product grid */}
@@ -75,7 +79,7 @@ export default async function PostPage({
             </div>
           </div> */}
           <div className="flex-1 flex flex-col gap-1.5">
-            {product?.rating_bars?.map((b, i) => (
+            {distribution?.map((b, i) => (
               <RatingBar rate={b} key={i} />
             ))}
           </div>
